@@ -1,0 +1,13 @@
+
+
++ graphic toolkit
+- isoler la partie AG de manière à ce qu'on puisse l'appeler d'une appli comme ants
+- Implanter The Hoshen-Kopelman Algorithm dans ségrégationism
+
+- Faire une version simplifiée pour une compréhension totale de l'AG
+- Documenter les classes avec leurs fonctions
+
+- Annoncer dans la description du cours qu'il y aura des aspects conceptuels
+- Faire plusieurs tracks (dont l'un pour geek)
+- mettre + de suggestions for further work
+
