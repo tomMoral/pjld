@@ -93,7 +93,7 @@ class DNA(object):
 		if coding == None:	coding = self.Scenario.Parameter('GeneCoding')
 		if coding in range(-1,3):
 			# old numeric designation of coding
-			coding = ['Nocoding', 'Weighted', 'Unweighted', 'Gray'][coding+1]
+			coding = ['NoCoding', 'Weighted', 'Unweighted', 'Gray'][coding+1]
 		value = 0
 		if coding == 'NoCoding':
 			return 0
