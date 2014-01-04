@@ -246,7 +246,6 @@ class Scenario(Default_Scenario):
 		"""
 		Amplification = self.Parameter('Selectivity')   # to accelerate evolution
 		Couples = Amplification*self.Parents   # couples waiting for procreation
-		print Couples, self.Parents, Amplification, '\n'
 		self.CurrentReproductionNumber = self.CurrentReproductionNumber[-50:] + [len(self.Parents)]
 		self.Parents = []
 		return Couples

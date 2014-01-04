@@ -124,37 +124,15 @@ class EvolifeGroup(Group):
 	"   class Group: list of individuals that interact and reproduce "
 	# Same as Group + reproduction + calls to Scenario functions
 
-	def __init__(self, Scenario, ID=1, Size=100):
-		self.Scenario = Scenario	# Scenario just holds parameters
-		self.size = 0
-		self.members = []
-		self.ranking = []   # to store a sorted list of individuals in the group
-		self.best_score = 0
-		self.ID = ID
-		self.location = 0   # geographical position 
-		self.Examiner = Examiner('GroupObs'+str(self.ID))
-		for individual in xrange(Size):
-			Indiv = self.createIndividual(Newborn=False)
-			self.receive(Indiv)
-		self.update_(flagRanking=True)
-		self.statistics()
-
-	#def createIndividual(self, Newborn=True):
-#		Indiv = Group.createIndividual(self, Newborn=Newborn)
-#		self.Scenario.new_agent(Indiv, None)  # let scenario know that there is a newcomer	
-#		return Indiv
-
 	def createIndividual(self, Newborn=True):
-		print 'zde'
 		Indiv = EvolifeIndividual(self.Scenario, ID=self.free_ID(), Newborn=Newborn)
-		if not Newborn:
-			self.Scenario.new_agent(Indiv, None)
+		self.Scenario.new_agent(Indiv, None)
 		return Indiv
 		
 	def uploadDNA(self, Start):
 		" loads given DNAs into individuals"
 		if Start:	
-			# if len(Start) != self.size:
+			# if len(Start) != self.size
 				# error("Group", "%d DNAs for %d individuals" % (len(Start), self.size))
 			for m in self.members:
 				m.DNAfill([int(n) for n in self.Start.pop(0).split()])
@@ -183,8 +161,7 @@ class EvolifeGroup(Group):
 				child.hybrid(C[0],C[1]) # child's DNA results from parents' DNA crossover
 				child.mutate()
 				child.update()  # computes the value of genes, as DNA is available only now
-				if self.Scenario.new_agent(child, C):  # let scenario decide something about the newcomer
-					self.receive(child) # adds child to the group
+				self.receive(child) # adds child to the group
 
 	def season(self, year):
 		" This function is called at the beginning of each year "
