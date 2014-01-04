@@ -106,7 +106,6 @@ from Evolife.Tools.Tools import error
 
 
 class Scenario(Default_Scenario):
-
 	######################################
 	# Most functions below overload some #
 	# functions of Default_Scenario	  #
@@ -247,6 +246,7 @@ class Scenario(Default_Scenario):
 		"""
 		Amplification = self.Parameter('Selectivity')   # to accelerate evolution
 		Couples = Amplification*self.Parents   # couples waiting for procreation
+		print Couples, self.Parents, Amplification, '\n'
 		self.CurrentReproductionNumber = self.CurrentReproductionNumber[-50:] + [len(self.Parents)]
 		self.Parents = []
 		return Couples
@@ -258,7 +258,7 @@ class Scenario(Default_Scenario):
 		self.paint(child)
 		child.Phene_value('Direction',random.randint(0,3))
 		child.Phene_value('Penalty',0)
-                child.Phene_value('Sex', random.randint(1,100))
+		child.Phene_value('Sex', random.randint(1,100))
 
 	def remove_agent(self, Agent):
 		" action to be performed when an agent dies "
@@ -292,7 +292,7 @@ class Scenario(Default_Scenario):
 
 		if self.Parameter('Compass'):
 			# Female's DNA codes for Male's next absolute direction
-			return self.TurnMap[TurnCode]
+			return self.TurnMap[TurnCode]%4
 		else:
 			# Female's DNA codes for Male's change of direction
 			Turn = self.TurnMap[TurnCode]
@@ -330,7 +330,11 @@ class Scenario(Default_Scenario):
 			if Female.location is not None:
 				Suitors = [S for S in self.Ground.Neighbours(Female.location[0:2])
 						   if not (self.female(S) or S in Beloved or S.Phene_value('Penalty')) ]
-			else:	Suitors = []
+			else:
+				Female.location = ()
+				Female.location = self.Ground.RandPlace(Female)	
+				print 'Pute baise'
+				Suitors = []
 			if Suitors == []:
 				continue
 			Male = Suitors[0] # the closest male is preferred
@@ -345,10 +349,25 @@ class Scenario(Default_Scenario):
 			# lonely males go straight most of the time
 			self.Move(Male, Male.Phene_value('Direction'))
 
+		c = [0,0]
+		for row in self.Ground.Ground:
+			for i in row:
+				if i is None: continue
+				if self.female(i):
+					c[0] += 1
+				else:
+					c[1] +=1
+		print c
+
 	def Move(self, Male, Direction):
 		" Male moves and possibily mates "
-
-		if Male.location is None:	return
+		if Male.location is None:
+			Male.location = ()
+			Male.location = self.Ground.RandPlace(Male)
+			Male.Phene_value('Direction',random.randint(0,3))
+			self.paint(Male)
+			print 'Connard added'
+			return
 		if random.randint(0,99) < self.Parameter('Noise'):
 			Dir = random.randint(0,3)
 		else:
