@@ -63,7 +63,7 @@ class Grid(object):
 		if self.move(Agent, Position) == Agent:
 			return self.toric(Position)
 		# recursive call
-		return self.divert(Agent, random.choice(self.Neighbourhood(Position)[0:5]))
+		return self.divert(Agent, random.choice(self.Neighbourhood(Position)[0:4]))
 
 	def Locate(self, Pos):
 		# returns whoever is at location Pos
@@ -258,6 +258,7 @@ class Scenario(Default_Scenario):
 		self.paint(child)
 		child.Phene_value('Direction',random.randint(0,3))
 		child.Phene_value('Penalty',0)
+                child.Phene_value('Sex', random.randint(1,100))
 
 	def remove_agent(self, Agent):
 		" action to be performed when an agent dies "
