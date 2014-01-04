@@ -91,7 +91,7 @@ class Genetic_map(object):
 		coding = self.Parameter('GeneCoding')
 		if coding in range(-1,3):
 			# old numeric designation of coding
-			coding = ['Nocoding', 'Weighted', 'Unweighted', 'Gray'][coding+1]		
+			coding = ['NoCoding', 'Weighted', 'Unweighted', 'Gray'][coding+1]		
 		if coding in ['Weighted', 'Gray']:
 			# Usual integer coding
 			return (1 << self.get_gene(Locus).length ) - 1
