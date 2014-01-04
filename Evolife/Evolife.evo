@@ -6,7 +6,7 @@ ControlGeneNumber	6
 DNAFill	-1
 DisplayPeriod	50
 DumpStart	100
-GeneCoding	1
+GeneCoding	-1
 GeneLength	0
 Gray	2
 GroupMaxSize	1000
@@ -24,7 +24,7 @@ ReproductionRate	30
 ResultDir	./___Results
 Rounds	0
 RunConfigFile	Evolife.evo
-ScenarioFileName	Expe\WernerDyer.evo
+ScenarioFileName	Expe/WernerDyer.evo
 ScenarioName	WernerDyer
 SelectionPressure	0
 Selectivity	3

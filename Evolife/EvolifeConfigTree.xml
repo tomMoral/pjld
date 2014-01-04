@@ -455,7 +455,7 @@
 		<Parameter>
 			<Name>GeneCoding</Name>
 			<Description><info><![CDATA[Indicates the way portions of DNA should ne interpreted<br>- Weighted: standard integer binary coding<br>- Unweighted: all bits play symmertrical roles <br>- Gray: Gray code<br>- Nocoding: genome is not decoded<br><br>Note: the WEIGHTED method may provoke sudden changes in gene expression. This may be good to escape from local <br>optima, since in the UNWEIGHTED condition, several mutations must be accumulated in the same individuals for significant change to occur.]]></info></Description>
-			<Value>1</Value>
+			<Value>-1</Value>
 			<Parameter>
 				<Name>Weighted</Name>
 				<Description><info><![CDATA[Genes interpreted as standard integer coding.<br>Advantage: many available values;<br>&nbsp;&nbsp;&nbsp;&nbsp;variable selection pressure on loci:<br>&nbsp;&nbsp;&nbsp;&nbsp;important loci evolve first.<br>&nbsp;&nbsp;&nbsp;&nbsp;Mutations on low bits have local effects<br>Caveat: getting from&nbsp;&nbsp;011111 to 100000 requires<br>&nbsp;&nbsp;&nbsp;&nbsp;six mutations, though the values are adjacent.]]></info></Description>
