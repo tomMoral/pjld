@@ -124,13 +124,32 @@ class EvolifeGroup(Group):
 	"   class Group: list of individuals that interact and reproduce "
 	# Same as Group + reproduction + calls to Scenario functions
 
-	def createIndividual(self, Newborn=True):
-		Indiv = Group.createIndividual(self, Newborn=Newborn)
-		self.Scenario.new_agent(Indiv, None)  # let scenario know that there is a newcomer	
-		return Indiv
+	def __init__(self, Scenario, ID=1, Size=100):
+		self.Scenario = Scenario	# Scenario just holds parameters
+		self.size = 0
+		self.members = []
+		self.ranking = []   # to store a sorted list of individuals in the group
+		self.best_score = 0
+		self.ID = ID
+		self.location = 0   # geographical position 
+		self.Examiner = Examiner('GroupObs'+str(self.ID))
+		for individual in xrange(Size):
+			Indiv = self.createIndividual(Newborn=False)
+			self.receive(Indiv)
+		self.update_(flagRanking=True)
+		self.statistics()
+
+	#def createIndividual(self, Newborn=True):
+#		Indiv = Group.createIndividual(self, Newborn=Newborn)
+#		self.Scenario.new_agent(Indiv, None)  # let scenario know that there is a newcomer	
+#		return Indiv
 
 	def createIndividual(self, Newborn=True):
-		return EvolifeIndividual(self.Scenario, ID=self.free_ID(), Newborn=Newborn)
+		print 'zde'
+		Indiv = EvolifeIndividual(self.Scenario, ID=self.free_ID(), Newborn=Newborn)
+		if not Newborn:
+			self.Scenario.new_agent(Indiv, None)
+		return Indiv
 		
 	def uploadDNA(self, Start):
 		" loads given DNAs into individuals"

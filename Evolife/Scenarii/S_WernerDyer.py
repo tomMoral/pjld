@@ -331,9 +331,6 @@ class Scenario(Default_Scenario):
 				Suitors = [S for S in self.Ground.Neighbours(Female.location[0:2])
 						   if not (self.female(S) or S in Beloved or S.Phene_value('Penalty')) ]
 			else:
-				Female.location = ()
-				Female.location = self.Ground.RandPlace(Female)	
-				print 'Pute baise'
 				Suitors = []
 			if Suitors == []:
 				continue
@@ -362,11 +359,6 @@ class Scenario(Default_Scenario):
 	def Move(self, Male, Direction):
 		" Male moves and possibily mates "
 		if Male.location is None:
-			Male.location = ()
-			Male.location = self.Ground.RandPlace(Male)
-			Male.Phene_value('Direction',random.randint(0,3))
-			self.paint(Male)
-			print 'Connard added'
 			return
 		if random.randint(0,99) < self.Parameter('Noise'):
 			Dir = random.randint(0,3)
