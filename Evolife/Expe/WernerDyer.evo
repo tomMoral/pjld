@@ -1,7 +1,6 @@
 AgeMax	4000
 ApplicationDir	.
 BatchMode	0
-Rounds	0
 Compass	0
 ControlGeneNumber	6
 DNAFill	-1
@@ -22,10 +21,13 @@ NoCoding	-1
 Noise	10
 PopulationSize	400
 ReproductionRate	30
+ResultDir	./___Results
+Rounds	0
+RunConfigFile	Evolife.evo
 ScenarioFileName	Expe/WernerDyer.evo
 ScenarioName	WernerDyer
 SelectionPressure	0
-Selectivity	3
+Selectivity	1
 StartFromFile	0
 Target	Main.py
 TimeLimit	20000

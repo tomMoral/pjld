@@ -394,7 +394,7 @@
 		<Parameter>
 			<Name>Selectivity</Name>
 			<Description><info><![CDATA[Defines how parenthood is biased toward individuals with high scores<br><br>S == 0 --> no bias<br>S == 1 --> elitism is roughly linear<br>S == 20 --> strong elitism<br>S == 40 --> very strong elitism<br><br>(Note that selection may also be achieved through differential mortality <br>(see parameter SelectionPressure))<br><br> Warning: This selection method is elitist. It amplifies small differences among top inidividuals, <br>but fails to discriminate among the crowd. It favours extreme (or lucky) behaviour. The SelectionPressure method has converse <br>qualities.]]></info></Description>
-			<Value>3</Value>
+			<Value>1</Value>
 		</Parameter>
 		<Parameter>
 			<Name>GroupMaxSize</Name>

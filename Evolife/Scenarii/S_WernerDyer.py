@@ -171,12 +171,12 @@ class Scenario(Default_Scenario):
 
 		#print reduce(lambda x,y: x+str(y), Avg_Indiv.get_DNA()[:60],'')
 		Paths = []
-		grid = self.Ground.Neighbourhood((2,2))
+		grid = self.Ground.Neighbourhood((3,3))
 		# Entrance: [(direction, ways in)...]
-		Entrance = [(self.MapMov[(1,0)],((0,4),(0,3),(0,2),(0,1),(0,0))),
-					(self.MapMov[(0,1)],((0,0),(1,0),(2,0),(3,0),(4,0))),
-					(self.MapMov[(-1,0)],((4,0),(4,1),(4,2),(4,3),(4,4))),
-					(self.MapMov[(0,-1)],((0,4),(1,4),(2,4),(3,4),(4,4)))]
+		Entrance = [(self.MapMov[(1,0)],((1,5),(1,4),(1,3),(1,2),(1,1))),
+					(self.MapMov[(0,1)],((1,1),(2,1),(3,1),(4,1),(5,1))),
+					(self.MapMov[(-1,0)],((5,1),(5,2),(5,3),(5,4),(5,5))),
+					(self.MapMov[(0,-1)],((1,5),(2,5),(3,5),(4,5),(5,5)))]
 		for (FirstDir,Entries) in Entrance:
 			for FirstPos in Entries:
 				(Pos,Dir) = (FirstPos, FirstDir)
@@ -205,36 +205,39 @@ class Scenario(Default_Scenario):
 		if Paths == None:	return None
 
 		# Adapting Paths to display
-		ScaleX = 10.9
-		ScaleY = 10.6
-		RelOffsX = 0.8
-		RelOffsY = 0.5
-		sh = 0.1	# shift to avoid overlapping curves
+		ScaleX = 100./13  #TODO
+		ScaleY = 100./13
+		RelOffsX = 0.05 
+		RelOffsY = 0.05
+		sh = 0.05	# shift to avoid overlapping curves
 		transform = lambda P: ((RelOffsX + P[1])*ScaleX, (RelOffsY + P[0])*ScaleY)		
 		Behaviour = []	# contains list of tailed blobs [(S1,(blobX,blobY,blobColour,blobSize,ToX,ToY,segmentColour,thickness)), (s2, (...)), ...]
 		for P in range(5):
-			LastStep = ( -1, 4 - P + sh*P)	# startpoint
+			LastStep = ( 0, 5 - P + sh*P)	# startpoint
+                        print Paths[P]
 			for (nro,step) in enumerate(Paths[P]):
 				NewStep = (step[0] + sh*P, step[1] + sh*P)
-				Behaviour.append(("S1_%d" % nro, (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
+				Behaviour.append(("S1_%d" % P, (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
 				LastStep = NewStep
+                        print Behaviour
+
 		for P in range(5):
-			LastStep = (6.0 + P + sh*P, 1)	# startpoint
+			LastStep = (7.0 + P + sh*P, 0)	# startpoint
 			for (nro,step) in enumerate(Paths[5+P]):
-				NewStep = (step[0] + 6 + sh*P, step[1] + sh*P)
-				Behaviour.append(("S2_%d" % nro, (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
+				NewStep = (step[0] + 7 + sh*P, step[1] + sh*P)
+				Behaviour.append(("S2_%d" % P, (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
 				LastStep = NewStep
 		for P in range(5):
-			LastStep = (12.0, 6.1 + P + sh*P)	# startpoint
+			LastStep = (13.0, 7 + P + sh*P)	# startpoint
 			for (nro,step) in enumerate(Paths[10+P]):
-				NewStep = (step[0] + 6 + sh*P, step[1] + 6.1 + sh*P)
-				Behaviour.append(("S3_%d" % nro, (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
+				NewStep = (step[0] + 7 + sh*P, step[1] + 7 + sh*P)
+				Behaviour.append(("S3_%d" % P, (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
 				LastStep = NewStep
 		for P in range(5):
-			LastStep = (P + sh*P, 12)	# startpoint
+			LastStep = (1 + P + sh*P, 13.)	# startpoint
 			for (nro,step) in enumerate(Paths[15+P]):
-				NewStep = (step[0] + sh*P, step[1] + 6.1 + sh*P)
-				Behaviour.append(("S4_%d" % nro, (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
+				NewStep = (step[0] + sh*P, step[1] + 7+ sh*P)
+				Behaviour.append(("S4_%d" % P, (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
 				LastStep = NewStep
 
 		return Behaviour
@@ -254,10 +257,10 @@ class Scenario(Default_Scenario):
 		" initializes newborns "
 		child.location = ()
 		child.location = self.Ground.RandPlace(child)
-		self.paint(child)
 		child.Phene_value('Direction',random.randint(0,3))
 		child.Phene_value('Penalty',0)
 		child.Phene_value('Sex', random.randint(1,100))
+		self.paint(child)
 
 	def remove_agent(self, Agent):
 		" action to be performed when an agent dies "
