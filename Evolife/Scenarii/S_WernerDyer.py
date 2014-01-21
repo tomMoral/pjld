@@ -205,39 +205,37 @@ class Scenario(Default_Scenario):
 		if Paths == None:	return None
 
 		# Adapting Paths to display
-		ScaleX = 100./13  #TODO
-		ScaleY = 100./13
-		RelOffsX = 0.05 
-		RelOffsY = 0.05
-		sh = 0.05	# shift to avoid overlapping curves
+		ScaleX = 8.3  #TODO
+		ScaleY = 8.3
+		RelOffsX = -0.16 
+		RelOffsY = -0.16
+		sh = 0.08	# shift to avoid overlapping curves
 		transform = lambda P: ((RelOffsX + P[1])*ScaleX, (RelOffsY + P[0])*ScaleY)		
 		Behaviour = []	# contains list of tailed blobs [(S1,(blobX,blobY,blobColour,blobSize,ToX,ToY,segmentColour,thickness)), (s2, (...)), ...]
 		for P in range(5):
 			LastStep = ( 0, 5 - P + sh*P)	# startpoint
-                        print Paths[P]
 			for (nro,step) in enumerate(Paths[P]):
 				NewStep = (step[0] + sh*P, step[1] + sh*P)
-				Behaviour.append(("S1_%d" % P, (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
+				Behaviour.append(("S1_%d" % (nro+15*P), (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
 				LastStep = NewStep
-                        print Behaviour
 
 		for P in range(5):
-			LastStep = (7.0 + P + sh*P, 0)	# startpoint
+			LastStep = (8.0 + P + sh*P, 0)	# startpoint
 			for (nro,step) in enumerate(Paths[5+P]):
 				NewStep = (step[0] + 7 + sh*P, step[1] + sh*P)
-				Behaviour.append(("S2_%d" % P, (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
+				Behaviour.append(("S2_%d" % (nro+15*P), (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
 				LastStep = NewStep
 		for P in range(5):
-			LastStep = (13.0, 7 + P + sh*P)	# startpoint
+			LastStep = (13.0, 8 + P + sh*P)	# startpoint
 			for (nro,step) in enumerate(Paths[10+P]):
 				NewStep = (step[0] + 7 + sh*P, step[1] + 7 + sh*P)
-				Behaviour.append(("S3_%d" % P, (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
+				Behaviour.append(("S3_%d" % (nro+15*P), (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
 				LastStep = NewStep
 		for P in range(5):
 			LastStep = (1 + P + sh*P, 13.)	# startpoint
 			for (nro,step) in enumerate(Paths[15+P]):
 				NewStep = (step[0] + sh*P, step[1] + 7+ sh*P)
-				Behaviour.append(("S4_%d" % P, (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
+				Behaviour.append(("S4_%d" % (nro+15*P), (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
 				LastStep = NewStep
 
 		return Behaviour
@@ -347,16 +345,6 @@ class Scenario(Default_Scenario):
 				continue
 			# lonely males go straight most of the time
 			self.Move(Male, Male.Phene_value('Direction'))
-
-		c = [0,0]
-		for row in self.Ground.Ground:
-			for i in row:
-				if i is None: continue
-				if self.female(i):
-					c[0] += 1
-				else:
-					c[1] +=1
-		print c
 
 	def Move(self, Male, Direction):
 		" Male moves and possibily mates "

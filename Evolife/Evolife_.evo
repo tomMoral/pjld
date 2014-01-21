@@ -11,6 +11,8 @@ GroupMinSize	0
 Icon	QtGraphics/EvolifeIcon.png
 MaxFollowers	3
 MaxGurus	1
+MutationRate	3
+NbCrossover	2
 Noise	10
 PopulationSize	400
 ResultDir	./___Results
