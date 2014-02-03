@@ -33,5 +33,5 @@ Target	Main.py
 TimeLimit	20000
 Title	Evolife
 Unweighted	1
-WDGridSize	100
+WDGridSize	300
 Weighted	0
