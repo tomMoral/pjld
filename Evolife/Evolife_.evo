@@ -11,7 +11,7 @@ GroupMinSize	0
 Icon	QtGraphics/EvolifeIcon.png
 MaxFollowers	3
 MaxGurus	1
-MutationRate	1
+MutationRate	3
 NbCrossover	2
 Noise	10
 PopulationSize	400
@@ -21,4 +21,4 @@ Selectivity	1
 StartFromFile	0
 TimeLimit	20000
 Title	Evolife
-WDGridSize	250
+WDGridSize	300

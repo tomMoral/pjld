@@ -35,6 +35,8 @@ class Grid(object):
 	def __init__(self, size):
 		self.Size = size
 		self.Ground = [[None for x in range(size)] for x in range(size)]
+		self.avg_chh_th=0;
+		self.avg_bty_th=0;
 		# Caveat:  [ [None] * size] * size would be incorrect
 		# as it would make shallow copies of the rows
 
@@ -268,7 +270,7 @@ class Scenario(Default_Scenario):
 		if not self.female(child):
 			MDNA = child.get_DNA()
 			locus = 8 + (48 if self.Parameter('Compass') else 192) + 7
-			chh_th = int(''.join(map(str,MDNA[locus:locus+7])))
+			chh_th = int(''.join(map(str,MDNA[locus:locus+7])),base=2)
 			bty = child.Phene_value('Beauty')
 			if bty < chh_th:
 				child.Phene_value('Idle', min(100, MDNA[locus+7]*int((chh_th-bty)**1.3/4.)))
@@ -347,7 +349,23 @@ class Scenario(Default_Scenario):
 		Beloved = []
 		# self.Ground.Consistency()
 
-		for Female in members:
+		self.avg_bty_th=0;
+		self.avg_chh_th=0;
+		for agent in members:
+			DNA = agent.get_DNA()
+			if self.Parameter('Compass'):
+				bty_locus = 8 + 48
+			else:
+				bty_locus = 8 + 192
+			chh_locus = bty_locus + 7
+			bty_th = int(''.join(map(str,DNA[bty_locus:bty_locus+7])),base=2)
+			chh_th = int(''.join(map(str,DNA[chh_locus:chh_locus+7])),base=2)
+			self.avg_bty_th += bty_th
+			self.avg_chh_th += chh_th
+		self.avg_bty_th /= len(members)
+		self.avg_chh_th /= len(members)
+
+		for Female in members:			
 			Female.score(self.Parameter('AgeMax')-Female.age,FlagSet=True)  # all individuals deteriorate
 			if not self.female(Female):
 				continue	# males wait for a song
@@ -436,7 +454,7 @@ class Scenario(Default_Scenario):
 	def display_(self):
 		""" Defines what is to be displayed. 
 		"""
-		return [('white','Reproduction'), ('green2','PopSize')]
+		return [('white','Reproduction'), ('green2','PopSize'),('red','Childhood_Threshold'),('pink','Beauty_Threshold')]
 		
 	def local_display(self,PlotNumber):
 		" allows to diplay locally defined values "
@@ -445,6 +463,10 @@ class Scenario(Default_Scenario):
 			return 100*sum(self.CurrentReproductionNumber,0.0)/max(len(self.CurrentReproductionNumber),1)
 		elif PlotNumber == 'PopSize':
 			return self.PopSize // 10
+		elif PlotNumber == 'Childhood_Threshold':
+			return self.avg_chh_th
+		elif PlotNumber == 'Beauty_Threshold':
+			return self.avg_bty_th
 
 	def wallpaper(self, Window):
 		" displays background image or colour when the window is created "
