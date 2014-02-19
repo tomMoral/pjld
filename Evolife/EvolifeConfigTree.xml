@@ -85,7 +85,7 @@
 				</Parameter>
 				<Parameter Scenario="WernerDyer">
 					<Name>WDGridSize</Name>
-					<Value>300</Value>
+					<Value>200</Value>
 				</Parameter>
 			</Parameter>
 			<Parameter>
