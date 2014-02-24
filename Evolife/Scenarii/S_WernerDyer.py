@@ -35,8 +35,6 @@ class Grid(object):
 	def __init__(self, size):
 		self.Size = size
 		self.Ground = [[None for x in range(size)] for x in range(size)]
-		self.avg_chh_th=0;
-		self.avg_bty_th=0;
 		# Caveat:  [ [None] * size] * size would be incorrect
 		# as it would make shallow copies of the rows
 
@@ -268,12 +266,14 @@ class Scenario(Default_Scenario):
 		child.Phene_value('Penalty',0)
 		child.Phene_value('Idle', 0)
 		if not self.female(child):
-			MDNA = child.get_DNA()
-			chh_th = Male.gene_relative_intensity('chh_th')
+			'MDNA = child.get_DNA()'
+			chh_th = child.gene_relative_intensity('chh_th')
+			chh_d = child.gene_intensity('chh_d')
 			bty = child.Phene_value('Beauty')
 			if bty < chh_th:
-				child.Phene_value('Idle', min(100, MDNA[locus+7]*int((chh_th-bty)**1.3/4.)))
-				child.Phene_value('Ad', min(100, bty + MDNA[locus+7]*int((chh_th-bty)**0.7)))
+				ad_cost = self.Parameter('AdCost')
+				child.Phene_value('Idle', chh_d*int((chh_th-bty)**ad_cost),True)
+				child.Phene_value('Ad', bty + chh_d*int((chh_th-bty)**ad_cost),True)
 			else:
 				child.Phene_value('Ad', bty)
 
@@ -294,11 +294,9 @@ class Scenario(Default_Scenario):
 		if self.Parameter('Compass'):
 			# Female's DNA codes for Male's next absolute direction
 			Locus = 8 + 2 * (MaleRelativeLocation)
-			bty_locus = 8 + 48
 		else:
 			# Female's DNA codes for Male's change of direction
 			Locus = 8 + 2 * (MaleRelativeLocation * 4 + MaleDirection)
-			bty_locus = 8 + 192
 		# Female sings, Male moves
 ##		Song = Female.read_DNA(Locus, Locus+2, coding = self.Parameter('Weighted'))
 ##		RelativeDirection = Male.read_DNA(2 * Song, 2 * Song + 2, coding = self.Parameter('Weighted'))
