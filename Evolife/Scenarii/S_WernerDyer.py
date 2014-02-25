@@ -147,7 +147,8 @@ class Scenario(Default_Scenario):
 		# Sex is considered a phenotypic characteristic !
 		# This is convenient because sex is determined at birth
 		# and is not inheritable
-		return ['Sex', 'Direction', 'Penalty', 'Beauty', 'Idle', 'Ad']
+		return ['Sex', 'Direction', 'Penalty', 'Beauty', 'Idle', 'Ad',
+                        'init']
 
 	def female(self, Agent):
 		return Agent.Phene_relative_value('Sex') >= 50
@@ -265,18 +266,19 @@ class Scenario(Default_Scenario):
 		child.Phene_value('Direction',random.randint(0,3))
 		child.Phene_value('Penalty',0)
 		child.Phene_value('Idle', 0)
+                child.Phene_value('init',0)
+                ''' 
 		if not self.female(child):
-			'MDNA = child.get_DNA()'
 			chh_th = child.gene_relative_intensity('chh_th')
 			chh_d = child.gene_intensity('chh_d')
 			bty = child.Phene_value('Beauty')
-			if bty < chh_th:
-				ad_cost = self.Parameter('AdCost')
+                        if bty < chh_th:
+				ad_cost = float(self.Parameter('AdCost'))
 				child.Phene_value('Idle', chh_d*int((chh_th-bty)**ad_cost),True)
 				child.Phene_value('Ad', bty + chh_d*int((chh_th-bty)**ad_cost),True)
 			else:
 				child.Phene_value('Ad', bty)
-
+                '''
 		self.paint(child)
 
 	def remove_agent(self, Agent):
@@ -363,7 +365,7 @@ class Scenario(Default_Scenario):
 						   if not (self.female(S) or S in Beloved 
 														   or S.Phene_value('Penalty')
 														   or S.Phene_value('Idle')
-														   ) ]
+														   or S.Phene_value('init')<1) ]
 			else:
 				Suitors = []
 			if Suitors == []:
@@ -374,9 +376,22 @@ class Scenario(Default_Scenario):
 			NewDirection = self.decision(Male,Female)
 			self.Move(Male, NewDirection)
 
-		for Male in members:
+		for Male in members: 
 			if self.female(Male) or Male in Beloved:
 				continue
+                        if not Male.Phene_value('init'):
+                            Male.Phene_value('init', 1)
+                            chh_th = Male.gene_relative_intensity('chh_th')
+			    chh_d = Male.gene_intensity('chh_d')
+			    bty = Male.Phene_value('Beauty')
+                            if bty < chh_th:
+				ad_cost = float(self.Parameter('AdCost'))
+				Male.Phene_value('Idle', chh_d*int((chh_th-bty)**ad_cost),True)
+				Male.Phene_value('Ad', bty + chh_d*int((chh_th-bty)**ad_cost),True)
+			    else:
+				Male.Phene_value('Ad', bty)
+                            self.paint(Male)
+
 			idle = Male.Phene_value('Idle')
 			if idle > 0:
 				Male.Phene_value('Idle', idle-0.25)

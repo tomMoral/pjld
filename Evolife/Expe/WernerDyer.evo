@@ -16,7 +16,7 @@ Icon	QtGraphics/EvolifeIcon.png
 MaxFollowers	3
 MaxGurus	1
 MigrationRate	10
-MutationRate	3
+MutationRate	1
 NbCrossover	2
 NoCoding	-1
 Noise	10
@@ -35,5 +35,5 @@ Target	Main.py
 TimeLimit	20000
 Title	Evolife
 Unweighted	1
-WDGridSize	300
+WDGridSize	250
 Weighted	0

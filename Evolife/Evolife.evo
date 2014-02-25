@@ -1,3 +1,4 @@
+AdCost	1.2
 AgeMax	4000
 ApplicationDir	.
 BatchMode	0
@@ -6,7 +7,7 @@ ControlGeneNumber	6
 DNAFill	-1
 DisplayPeriod	50
 DumpStart	100
-GeneCoding	-1
+GeneCoding	0
 GeneLength	0
 Gray	2
 GroupMaxSize	1000

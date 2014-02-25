@@ -1,10 +1,11 @@
+AdCost	1.2
 AgeMax	4000
 BatchMode	0
 Compass	0
 DNAFill	-1
 DisplayPeriod	50
 DumpStart	100
-GeneCoding	-1
+GeneCoding	0
 GeneLength	0
 GroupMaxSize	1000
 GroupMinSize	0
