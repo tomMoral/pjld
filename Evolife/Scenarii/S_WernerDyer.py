@@ -122,6 +122,7 @@ class Scenario(Default_Scenario):
 		else:
 			self.TurnMap = {0:0, 1:-1, 2:1, 3:2} # important to have a Gray code here: a U-turn requires more genetic change
 		self.PopSize = 0
+                self.proba = 0
 
 	def genemap(self):
 		""" Defines the name of genes and their position on the DNA. (see Genetic_map.py)
@@ -136,10 +137,10 @@ class Scenario(Default_Scenario):
 		"""
 		if self.Parameter('Compass'):
 			return [('coding',8), ('decoding',48), 
-								('bty_th',8), ('chh_th',8),('chh_d',1)]
+				('bty_th',8), ('chh_th',8)]
 		else:
 			return [('coding',8), ('decoding',192), 
-								('bty_th',8), ('chh_th', 8),('chh_d',1)]
+				('bty_th',8), ('chh_th', 8)]
 
 	def phenemap(self):
 		""" Defines the set of non inheritable characteristics
@@ -185,6 +186,7 @@ class Scenario(Default_Scenario):
 					(self.MapMov[(0,1)],((1,1),(2,1),(3,1),(4,1),(5,1))),
 					(self.MapMov[(-1,0)],((5,1),(5,2),(5,3),(5,4),(5,5))),
 					(self.MapMov[(0,-1)],((1,5),(2,5),(3,5),(4,5),(5,5)))]
+                proba = 0
 		for (FirstDir,Entries) in Entrance:
 			for FirstPos in Entries:
 				(Pos,Dir) = (FirstPos, FirstDir)
@@ -208,6 +210,7 @@ class Scenario(Default_Scenario):
 						Cell = grid.index(Pos)
 					except ValueError:
 						break
+                                if Path[-1] == (3,3): proba += 1
 				Paths.append(Path)
 
 		if Paths == None:	return None
@@ -246,6 +249,10 @@ class Scenario(Default_Scenario):
 				Behaviour.append(("S4_%d" % (nro+15*P), (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
 				LastStep = NewStep
 
+                #Compute the probability of encountering a female if you are in
+                #her neighboorhood
+                self.proba = 100* proba / 20.
+
 		return Behaviour
 		
 
@@ -265,21 +272,9 @@ class Scenario(Default_Scenario):
 		child.location = self.Ground.RandPlace(child)
 		child.Phene_value('Direction',random.randint(0,3))
 		child.Phene_value('Penalty',0)
-		child.Phene_value('Idle', 0)
+		child.Phene_value('Idle', 0.25)
                 child.Phene_value('init',0)
-                ''' 
-		if not self.female(child):
-			chh_th = child.gene_relative_intensity('chh_th')
-			chh_d = child.gene_intensity('chh_d')
-			bty = child.Phene_value('Beauty')
-                        if bty < chh_th:
-				ad_cost = float(self.Parameter('AdCost'))
-				child.Phene_value('Idle', chh_d*int((chh_th-bty)**ad_cost),True)
-				child.Phene_value('Ad', bty + chh_d*int((chh_th-bty)**ad_cost),True)
-			else:
-				child.Phene_value('Ad', bty)
-                '''
-		self.paint(child)
+                self.paint(child)
 
 	def remove_agent(self, Agent):
 		" action to be performed when an agent dies "
@@ -363,9 +358,9 @@ class Scenario(Default_Scenario):
 			if Female.location is not None:
 				Suitors = [S for S in self.Ground.Neighbours(Female.location[0:2])
 						   if not (self.female(S) or S in Beloved 
-														   or S.Phene_value('Penalty')
-														   or S.Phene_value('Idle')
-														   or S.Phene_value('init')<1) ]
+						   or S.Phene_value('Penalty')
+                                                   or S.Phene_value('Idle')
+                                                   or S.Phene_value('init')<1) ]
 			else:
 				Suitors = []
 			if Suitors == []:
@@ -382,13 +377,13 @@ class Scenario(Default_Scenario):
                         if not Male.Phene_value('init'):
                             Male.Phene_value('init', 1)
                             chh_th = Male.gene_relative_intensity('chh_th')
-			    chh_d = Male.gene_intensity('chh_d')
 			    bty = Male.Phene_value('Beauty')
                             if bty < chh_th:
 				ad_cost = float(self.Parameter('AdCost'))
-				Male.Phene_value('Idle', chh_d*int((chh_th-bty)**ad_cost),True)
-				Male.Phene_value('Ad', bty + chh_d*int((chh_th-bty)**ad_cost),True)
+				Male.Phene_value('Idle', int((chh_th-bty)**ad_cost),True)
+				Male.Phene_value('Ad', chh_th ,True)
 			    else:
+                                MAle.Phene_value('Idle', 0, True)
 				Male.Phene_value('Ad', bty)
                             self.paint(Male)
 
@@ -431,7 +426,8 @@ class Scenario(Default_Scenario):
 			bty_f = Partner.Phene_value('Beauty')
 			bty_m = Male.Phene_value('Beauty')
 			if bty_f > bty_m:
-				Partner.Phene_value('Idle', min(int(((bty_f-bty_m)**1.3)/4.),100))
+                                ad_cost = float(self.Parameter('AdCost'))
+				Partner.Phene_value('Idle', min(int(((bty_f-bty_m)**ad_cost)/4.),100))
 				self.paint(Partner)
 			self.Parents.append((Male,Partner))
 			self.Ground.RandPlace(Male),
@@ -450,7 +446,10 @@ class Scenario(Default_Scenario):
 	def display_(self):
 		""" Defines what is to be displayed. 
 		"""
-		return [('white','Reproduction'), ('green2','PopSize'),('red','chh_th'),('pink','bty_th'),('blue','chh_d')]
+		return [('white','Reproduction'),
+                        ('green2','PopSize'), ('red','chh_th'),
+                        ('pink','bty_th'),
+                        ('yellow', 'ProbaMeet')]
 		
 	def local_display(self,PlotNumber):
 		" allows to diplay locally defined values "
@@ -459,6 +458,8 @@ class Scenario(Default_Scenario):
 			return 100*sum(self.CurrentReproductionNumber,0.0)/max(len(self.CurrentReproductionNumber),1)
 		elif PlotNumber == 'PopSize':
 			return self.PopSize // 10
+                elif PlotNumber == 'ProbaMeet':
+                        return self.proba
 
 	def wallpaper(self, Window):
 		" displays background image or colour when the window is created "
