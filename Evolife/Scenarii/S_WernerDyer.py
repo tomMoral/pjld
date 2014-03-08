@@ -383,7 +383,7 @@ class Scenario(Default_Scenario):
 				Male.Phene_value('Idle', int((chh_th-bty)**ad_cost),True)
 				Male.Phene_value('Ad', chh_th ,True)
 			    else:
-                                MAle.Phene_value('Idle', 0, True)
+                                Male.Phene_value('Idle', 0, True)
 				Male.Phene_value('Ad', bty)
                             self.paint(Male)
 
