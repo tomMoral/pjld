@@ -524,7 +524,7 @@
 		<Parameter>
 			<Name>BatchMode</Name>
 			<Description><info><![CDATA[If set to 1, no display occurs. Useful to launch experiments in batch mode, e.g. on several machines. <br>Results are still stored in .csv files. In batch mode, these files are given unique names, so that different experiments can be run simultaneously.]]></info></Description>
-			<Value>0</Value>
+			<Value>1</Value>
 		</Parameter>
 		<Parameter>
 			<Name>ApplicationDir</Name>

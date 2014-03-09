@@ -1,1 +1,1 @@
-python QtGraphics/TreeExplore.py ./EvolifeConfigTree.xml &
+python QtGraphics/TreeExplore.py EvolifeConfigTree.xml &

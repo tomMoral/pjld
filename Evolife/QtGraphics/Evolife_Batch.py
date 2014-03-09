@@ -67,9 +67,10 @@ class Evolife_Batch(object):
 			return -1	# Stops the simulation thread
 		else:
 			return 0
-					  
+
 	def Process_graph_orders(self, BestPhenotype):
 		for (CurveId, Point) in self.Obs.get_data('PlotOrders'):
+		#for(CurveId,Point) in self.Obs.GetPlotOrders():
 			try:
 				self.Curves.Curves[CurveId].add(Point)
 			except IndexError:

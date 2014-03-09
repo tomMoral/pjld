@@ -99,7 +99,7 @@ class NumericStorage(Storage):
 		self.average = map(lambda x: sum(x,0.0)/len(self.storage), TStorage)
 
 		return (len(self.storage), self.best, self.average, tuple(self.get_data()))
-	   
+
 class Examiner:
 	""" Groups several storages in different slots with different names.
 		Use by calling in sequence:
@@ -145,7 +145,7 @@ class Examiner:
 
 	def get_data(self,Slot):
 		try:
-			return storages[Slot].get_data()
+			return self.storages[Slot].get_data()
 ##			return tuple(self.storages[Slot].storage)
 		except KeyError:
 			return None
