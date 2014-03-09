@@ -363,6 +363,29 @@ class EvolifeObserver(Observer):
 			self.recordInfo(Window + 'Wallpaper', self.Scenario.wallpaper(Window))
 		self.recordInfo('DefaultViews', self.Scenario.default_view())
 
+	def GetBatchPlot(self):
+		PlotOrders = []
+		k=0
+		for (Curve_id, value_name) in self.Scenario.display_():
+			if value_name == 'best':
+				value = self.Statistics['Properties']['best'][1]
+			elif value_name == 'average':
+				value = self.Statistics['Properties']['average'][1]
+			elif value_name in self.Scenario.get_gene_names():
+				# displaying average values of genes
+				value = self.Statistics['Genomes']['average'][self.Scenario.get_locus(value_name)]
+			elif value_name in self.Scenario.phenemap():
+				# displaying average values of phenes
+				value = self.Statistics['Phenomes']['average'][self.Scenario.phenemap().index(value_name)]
+			else:
+				value = self.Scenario.local_display(value_name)
+				if value is None:
+					error(self.Name,": unknown display instruction: " + value_name)
+					value = 0
+			PlotOrders.append((k,(self.StepId,int(value))))
+			k+=1
+		return PlotOrders
+
 	def GetPlotOrders(self):
 		""" Gets the curves to be displayed from the scenario and
 			returns intantaneous values to be displayed on these curves
@@ -380,10 +403,10 @@ class EvolifeObserver(Observer):
 				# displaying average values of phenes
 				value = self.Statistics['Phenomes']['average'][self.Scenario.phenemap().index(value_name)]
 			else:
-					value = self.Scenario.local_display(value_name)
-					if value is None:
-						error(self.Name,": unknown display instruction: " + value_name)
-						value = 0
+				value = self.Scenario.local_display(value_name)
+				if value is None:
+					error(self.Name,": unknown display instruction: " + value_name)
+					value = 0
 			PlotOrders.append((Curve_id,(self.StepId,int(value))))
 		return PlotOrders
 

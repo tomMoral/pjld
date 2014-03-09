@@ -511,7 +511,7 @@
 		<Parameter>
 			<Name>TimeLimit</Name>
 			<Description><info><![CDATA[Maximum number of steps before simulation stops. Set to 0 if no limit.<br>If DisplayPeriod == 0, Evolife will automatically exit after TimeLimit.<br>Otherwise, it will switch to stepwise mode. It is thus ready to <br>run until another TimeLimit is reached again.<br>]]></info></Description>
-			<Value>20000</Value>
+			<Value>2000</Value>
 		</Parameter>
 		<Parameter>
 			<Name>DumpStart</Name>
@@ -524,7 +524,7 @@
 		<Parameter>
 			<Name>BatchMode</Name>
 			<Description><info><![CDATA[If set to 1, no display occurs. Useful to launch experiments in batch mode, e.g. on several machines. <br>Results are still stored in .csv files. In batch mode, these files are given unique names, so that different experiments can be run simultaneously.]]></info></Description>
-			<Value>1</Value>
+			<Value>0</Value>
 		</Parameter>
 		<Parameter>
 			<Name>ApplicationDir</Name>

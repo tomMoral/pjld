@@ -377,15 +377,15 @@ class Scenario(Default_Scenario):
 			if not Male.Phene_value('init'):
 				Male.Phene_value('init', 1)
 				chh_th = Male.gene_relative_intensity('chh_th')
-			bty = Male.Phene_value('Beauty')
-			if bty < chh_th:
-				ad_cost = float(self.Parameter('AdCost'))
-				Male.Phene_value('Idle', int((chh_th-bty)**ad_cost),True)
-				Male.Phene_value('Ad', chh_th ,True)
-			else:
-				Male.Phene_value('Idle', 0, True)
-			Male.Phene_value('Ad', bty)
-			self.paint(Male)
+				bty = Male.Phene_value('Beauty')
+				if bty < chh_th:
+					ad_cost = float(self.Parameter('AdCost'))
+					Male.Phene_value('Idle', int((chh_th-bty)**ad_cost),True)
+					Male.Phene_value('Ad', chh_th ,True)
+				else:
+					Male.Phene_value('Idle', 0, True)
+					Male.Phene_value('Ad', bty)
+				self.paint(Male)
 
 			idle = Male.Phene_value('Idle')
 			if idle > 0:

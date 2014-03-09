@@ -1,7 +1,7 @@
 AdCost	1.2
 AgeMax	4000
 ApplicationDir	.
-BatchMode	1
+BatchMode	0
 Compass	0
 ControlGeneNumber	6
 DNAFill	-1
@@ -31,7 +31,7 @@ SelectionPressure	0
 Selectivity	1
 StartFromFile	0
 Target	Main.py
-TimeLimit	20000
+TimeLimit	2000
 Title	Evolife
 Unweighted	1
 WDGridSize	200
