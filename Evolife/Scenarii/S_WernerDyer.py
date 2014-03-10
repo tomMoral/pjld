@@ -446,10 +446,10 @@ class Scenario(Default_Scenario):
 	def display_(self):
 		""" Defines what is to be displayed. 
 		"""
-		return [('white','Reproduction'),
-                        ('green2','PopSize'), ('red','chh_th'),
-                        ('pink','bty_th'),
-                        ('yellow', 'ProbaMeet')]
+		return [('grey','Reproduction'),
+                        ('black','PopSize'), ('white','chh_th'),
+                        ('blue','bty_th'),
+                        ('red', 'ProbaMeet')]
 		
 	def local_display(self,PlotNumber):
 		" allows to diplay locally defined values "

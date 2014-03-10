@@ -72,7 +72,7 @@ class Evolife_Batch(object):
 		#for (CurveId, Point) in self.Obs.get_data('PlotOrders'):
 		for(CurveId,Point) in self.Obs.GetBatchPlot():
 			try:
-				print CurveId," : ",Point
+				#print CurveId," : ",Point
 				self.Curves.Curves[CurveId].add(Point)
 			except IndexError:
 				error("Evolife_Batch: unknown curve ID")
