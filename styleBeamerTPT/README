@@ -1,0 +1,14 @@
+TPT style for Beamer presentation, (C) Ludovic Apvrille, Telecom ParisTech
+ludovic.apvrille@telecom-paristech.fr
+
+* To edit the file: use emacs ... or if you really don't have emacs, you may use vi before installing emacs ;-)
+
+$ emacs styleTPT.tex
+
+Then, you may modify the title, date, name of conference and authors in lines 183 to 186
+
+Simply compile the presentation with make:
+
+$make 
+
+Enjoy!

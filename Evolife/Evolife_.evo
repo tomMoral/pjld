@@ -1,5 +1,6 @@
+AdCost	1.3
 AgeMax	4000
-BatchMode	0
+BatchMode	1
 Compass	0
 DNAFill	-1
 DisplayPeriod	50
@@ -7,13 +8,18 @@ DumpStart	100
 GeneCoding	0
 GeneLength	0
 GroupMaxSize	1000
+GroupMinSize	0
 Icon	QtGraphics/EvolifeIcon.png
 MaxFollowers	3
 MaxGurus	1
+MutationRate	3
+NbCrossover	2
+Noise	10
 PopulationSize	400
 ResultDir	./___Results
 ScenarioName	WernerDyer
+Selectivity	1
 StartFromFile	0
-TimeLimit	500
+TimeLimit	20000
 Title	Evolife
 WDGridSize	200

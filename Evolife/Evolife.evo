@@ -31,7 +31,7 @@ SelectionPressure	0
 Selectivity	1
 StartFromFile	0
 Target	Main.py
-TimeLimit	40000
+TimeLimit	2000
 Title	Evolife
 Unweighted	1
 WDGridSize	200

@@ -1,0 +1,15 @@
+Ajout phène beauty (à la naissance, random)
+Ajout phène ad (à la naissance,=beauty)
+Gène bty_th (beauty threshold) : femelles, 7 bits
+Gène chh_th (childhood threshold) : males, 8 bits, 7 pour le niveau d'advertising à atteindre, 1 si oui ou non il y aura childhood
+A la naissance, pour les males,
+	- si beauty>=chh_th, c'est bon, il a un advertising = beauty
+	- sinon, soit il ne fait pas de childhood, et advertising = beauty
+	- il peut faire sa childhood, auquel cas, elle dure abs(bty-chh_th)**1.3, et elle fait gagner abs(bty-chh_th)**0.7 de ad
+Phène Idle : en cas de childhood, on lui donne une valeur qui est décrémentée à chaque tour (si idle>0, pas de tour pour lui)
+
+
+chh = chh_decision * (chh_th-bty)**ad_cost
+Calculer espérance reproduction
+Normalement, chh tend vers 0
+Paramètres en xml

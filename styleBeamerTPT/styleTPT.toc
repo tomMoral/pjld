@@ -1,0 +1,4 @@
+\beamer@endinputifotherversion {3.24pt}
+\beamer@sectionintoc {1}{Werner \& Dyer experiment}{3}{0}{1}
+\beamer@sectionintoc {2}{Our Experiment}{8}{0}{2}
+\beamer@sectionintoc {3}{Theoric results}{13}{0}{3}
