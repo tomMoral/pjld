@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.6)  12 MAR 2014 22:29
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.6)  13 MAR 2014 09:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1085,7 +1085,7 @@ Dictionary: translator-theorem-dictionary, Language: English
 LaTeX Info: Redefining \includegraphics on input line 189.
 \c@lstlisting=\count178
  (./styleTPT.nav)
-<figures/tpt.pdf, id=29, 285.065pt x 285.065pt>
+<figures/tpt.pdf, id=34, 285.065pt x 285.065pt>
 File: figures/tpt.pdf Graphic file (type pdf)
  <use figures/tpt.pdf>
 Package pdftex.def Info: figures/tpt.pdf used on input line 192.
@@ -1228,12 +1228,83 @@ Package pdftex.def Info: figures/tpt.pdf used on input line 338.
 (pdftex.def)             Requested size: 28.45274pt x 28.45161pt.
  [17
 
+] (./styleTPT.toc)
+File: figures/tpt.pdf Graphic file (type pdf)
+ <use figures/tpt.pdf>
+Package pdftex.def Info: figures/tpt.pdf used on input line 340.
+(pdftex.def)             Requested size: 28.45274pt x 28.45161pt.
+ [18
+
+]
+<expected_time_160_7.png, id=232, 408.3255pt x 408.3255pt>
+File: expected_time_160_7.png Graphic file (type png)
+
+<use expected_time_160_7.png>
+Package pdftex.def Info: expected_time_160_7.png used on input line 348.
+(pdftex.def)             Requested size: 153.64493pt x 153.64505pt.
+
+<expected_time_160_15.png, id=234, 409.0482pt x 409.0482pt>
+File: expected_time_160_15.png Graphic file (type png)
+
+<use expected_time_160_15.png>
+Package pdftex.def Info: expected_time_160_15.png used on input line 348.
+(pdftex.def)             Requested size: 153.64493pt x 153.64235pt.
+File: figures/tpt.pdf Graphic file (type pdf)
+ <use figures/tpt.pdf>
+Package pdftex.def Info: figures/tpt.pdf used on input line 348.
+(pdftex.def)             Requested size: 28.45274pt x 28.45161pt.
+ [19
+
+ <./expected_time_160_7.png> <./expected_time_160_15.png>] (./dessin_tikz_13_re
+s.txt)
+File: figures/tpt.pdf Graphic file (type pdf)
+
+<use figures/tpt.pdf>
+Package pdftex.def Info: figures/tpt.pdf used on input line 353.
+(pdftex.def)             Requested size: 28.45274pt x 28.45161pt.
+ [20
+
+] <120_1_traj.png, id=256, 737.8767pt x 625.1355pt>
+File: 120_1_traj.png Graphic file (type png)
+
+<use 120_1_traj.png>
+Package pdftex.def Info: 120_1_traj.png used on input line 361.
+(pdftex.def)             Requested size: 153.64493pt x 130.16628pt.
+File: figures/tpt.pdf Graphic file (type pdf)
+ <use figures/tpt.pdf>
+Package pdftex.def Info: figures/tpt.pdf used on input line 361.
+(pdftex.def)             Requested size: 28.45274pt x 28.45161pt.
+ [21
+
+ <./120_1_traj.png>]
+(./dessin_tikz_10_res.txt)
+File: figures/tpt.pdf Graphic file (type pdf)
+ <use figures/tpt.pdf>
+Package pdftex.def Info: figures/tpt.pdf used on input line 366.
+(pdftex.def)             Requested size: 28.45274pt x 28.45161pt.
+ [22
+
+] (./dessin_tikz_18_res.txt)
+File: figures/tpt.pdf Graphic file (type pdf)
+ <use figures/tpt.pdf>
+Package pdftex.def Info: figures/tpt.pdf used on input line 371.
+(pdftex.def)             Requested size: 28.45274pt x 28.45161pt.
+ [23
+
+] (./dessin_tikz_49_res.txt)
+File: figures/tpt.pdf Graphic file (type pdf)
+ <use figures/tpt.pdf>
+Package pdftex.def Info: figures/tpt.pdf used on input line 376.
+(pdftex.def)             Requested size: 28.45274pt x 28.45161pt.
+
+[24
+
 ]
 File: figures/tpt.pdf Graphic file (type pdf)
  <use figures/tpt.pdf>
-Package pdftex.def Info: figures/tpt.pdf used on input line 343.
+Package pdftex.def Info: figures/tpt.pdf used on input line 381.
 (pdftex.def)             Requested size: 28.45274pt x 28.45161pt.
- [18
+ [25
 
 ]
 \tf@nav=\write6
@@ -1245,26 +1316,26 @@ Package pdftex.def Info: figures/tpt.pdf used on input line 343.
 \tf@snm=\write8
 \openout8 = `styleTPT.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 347.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 347.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 385.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 385.
  (./styleTPT.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 347.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 347.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 385.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 385.
 Package rerunfilecheck Info: File `styleTPT.out' has not changed.
-(rerunfilecheck)             Checksum: B7BB7E106DABF30CD3B84EDABA4A40CE;161.
+(rerunfilecheck)             Checksum: 072B32DC178AF9F2E46B67007841A12F;203.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 347.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 385.
  ) 
 Here is how much of TeX's memory you used:
- 22036 strings out of 493307
- 442826 string characters out of 6139906
- 567803 words of memory out of 5000000
- 24908 multiletter control sequences out of 15000+600000
- 13324 words of font info for 49 fonts, out of 8000000 for 9000
+ 23339 strings out of 493307
+ 470676 string characters out of 6139906
+ 883125 words of memory out of 5000000
+ 26178 multiletter control sequences out of 15000+600000
+ 13629 words of font info for 50 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  49i,19n,64p,397b,774s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
@@ -1277,10 +1348,10 @@ onts/type1/public/amsfonts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/amsfonts/symbols/msbm10.pfb>
-Output written on styleTPT.pdf (18 pages, 125706 bytes).
+Output written on styleTPT.pdf (25 pages, 313971 bytes).
 PDF statistics:
- 248 PDF objects out of 1000 (max. 8388607)
- 202 compressed objects within 3 object streams
- 39 named destinations out of 1000 (max. 500000)
- 72 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 352 PDF objects out of 1000 (max. 8388607)
+ 292 compressed objects within 3 object streams
+ 54 named destinations out of 1000 (max. 500000)
+ 95 words of extra memory for PDF output out of 10000 (max. 10000000)
 
