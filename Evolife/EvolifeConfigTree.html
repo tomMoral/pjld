@@ -10,10 +10,10 @@
 <h2>Scenarios ==> CurrentScenario</h2>
 <p style="color: blue; font-family: courier"></p>
 
-<h3>Scenarios ==> CurrentScenario ==> ScenarioName --> HeteroclineCycle</h3>
+<h3>Scenarios ==> CurrentScenario ==> ScenarioName --> WernerDyer</h3>
 <p style="color: blue; font-family: courier"></p>
 
-<h3>Scenarios ==> CurrentScenario ==> ScenarioFileName --> Expe\Heterocline.evo</h3>
+<h3>Scenarios ==> CurrentScenario ==> ScenarioFileName --> Expe/WernerDyer.evo</h3>
 <p style="color: blue; font-family: courier"></p>
 
 <h2>Scenarios ==> Test</h2>
@@ -44,7 +44,7 @@
 <p style="color: blue; font-family: courier">Penalty for encountering poisonous pheromon<br></p>
 
 <h5>Scenarios ==> Genetic Algorithms ==> Labyrinth ==> Evaluation ==> MaxPoison --> 20</h5>
-<p style="color: blue; font-family: courier">Maximal quantity of pheromon a cell may hold</p>
+<p style="color: blue; font-family: courier">Maximal quantity of poison that an individual absorbs</p>
 
 <h5>Scenarios ==> Genetic Algorithms ==> Labyrinth ==> Evaluation ==> PenaltyU_turn --> 4</h5>
 <p style="color: blue; font-family: courier">Penalty for making a u-turn</p>
@@ -61,7 +61,10 @@
 <h4>Scenarios ==> Genetic Algorithms ==> WernerDyer ==> Compass --> 0</h4>
 <p style="color: blue; font-family: courier">Indicates whether the female part of the DNA codes for absolute directions (East, North, West, South) (Compass==1)<br>or codes for direction change (straight on, left, right, u-turn) (Compass==0).<br></p>
 
-<h4>Scenarios ==> Genetic Algorithms ==> WernerDyer ==> WDGridSize --> 100</h4>
+<h4>Scenarios ==> Genetic Algorithms ==> WernerDyer ==> WDGridSize --> 200</h4>
+<p style="color: blue; font-family: courier"></p>
+
+<h4>Scenarios ==> Genetic Algorithms ==> WernerDyer ==> AdCost --> 1.3</h4>
 <p style="color: blue; font-family: courier"></p>
 
 <h3>Scenarios ==> Genetic Algorithms ==> Zip</h3>
@@ -82,11 +85,14 @@
 <h3>Scenarios ==> Behavioural Ecology ==> Favourable</h3>
 <p style="color: blue; font-family: courier">Simple Darwinian scenario: carriers of gene named 'Favourable' get life points.<br>The gene is expected to invade the population.<br>Alternatively, individuals get some collective benefit from the fact that<br>there are carriers of the 'Favourable' gene in the group. In that case,<br>the fate of the gene is no longer obvious, even if the collective benefit is high!</p>
 
-<h4>Scenarios ==> Behavioural Ecology ==> Favourable ==> IndividualBenefit --> 10</h4>
+<h4>Scenarios ==> Behavioural Ecology ==> Favourable ==> IndividualBenefit --> 3</h4>
 <p style="color: blue; font-family: courier"></p>
 
-<h4>Scenarios ==> Behavioural Ecology ==> Favourable ==> CollectiveBenefit --> 0</h4>
+<h4>Scenarios ==> Behavioural Ecology ==> Favourable ==> CollectiveBenefit --> -10</h4>
 <p style="color: blue; font-family: courier"></p>
+
+<h4>Scenarios ==> Behavioural Ecology ==> Favourable ==> Cumulative --> 1</h4>
+<p style="color: blue; font-family: courier">Indicates whether scores are accumulated or are reset every year</p>
 
 <h3>Scenarios ==> Behavioural Ecology ==> GreenBeard</h3>
 <p style="color: blue; font-family: courier"></p>
@@ -103,23 +109,23 @@
 <h4>Scenarios ==> Behavioural Ecology ==> SexRatio ==> SelectiveDeath --> 0</h4>
 <p style="color: blue; font-family: courier">Proportion (in percentage) of males killed at birth<br></p>
 
-<h4>Scenarios ==> Behavioural Ecology ==> SexRatio ==> Hymenoptera --> 0</h4>
+<h4>Scenarios ==> Behavioural Ecology ==> SexRatio ==> Hymenoptera --> 1</h4>
 <p style="color: blue; font-family: courier">To mimic hymenoptera reproduction, the child is further hybrided with one of its parents (same sex or opposite sex, systematically), so as to increase the relatedness with the parent.<br></p>
 
 <h3>Scenarios ==> Behavioural Ecology ==> HeteroclineCycle</h3>
 <p style="color: blue; font-family: courier">After <br> Sigmund, K. (1998). <i> The population dynamics of conflict and cooperation </i> . <br> We suppose that we observe three species, such as bacteria in the gut. Suppose that in the absence of the third species, species 2 dominates 1, 3 dominates 2 and 1, in turn, dominates 3. For example, species 2 develops both a substance that is poisonous for 1 and a substance that makes itself immune to the poison. Species 3 develops the antidote but avoids the burden of synthesizing the poison. Species 1 devotes no energy to synthesizing either the poison or the antidote. <P> The purpose of the study is to observe the dynamics of the three species. Some reasonable diffusion delays, possibly implemented through spatial diffusion, might be necessary for the phenomenon to occur.</p>
 
-<h4>Scenarios ==> Behavioural Ecology ==> HeteroclineCycle ==> MaxPollution --> 100</h4>
-<p style="color: blue; font-family: courier">Maximal quantity of poison an individual may absorb</p>
-
-<h4>Scenarios ==> Behavioural Ecology ==> HeteroclineCycle ==> EmittedPoison --> 500</h4>
+<h4>Scenarios ==> Behavioural Ecology ==> HeteroclineCycle ==> EmittedPoison --> 200</h4>
 <p style="color: blue; font-family: courier">Individual contribution to environmental pollution by polluting individuals</p>
 
 <h4>Scenarios ==> Behavioural Ecology ==> HeteroclineCycle ==> PoisonCost --> 2</h4>
 <p style="color: blue; font-family: courier">Cost for generating poison</p>
 
-<h4>Scenarios ==> Behavioural Ecology ==> HeteroclineCycle ==> AntidoteCost --> 10</h4>
+<h4>Scenarios ==> Behavioural Ecology ==> HeteroclineCycle ==> AntidoteCost --> 5</h4>
 <p style="color: blue; font-family: courier">Cost for generating antidote</p>
+
+<h4>Scenarios ==> Behavioural Ecology ==> HeteroclineCycle ==> Absorption --> 10</h4>
+<p style="color: blue; font-family: courier">Fraction <b>per thousand</b> of the total poison quantity that an individual absorbs</p>
 
 <h3>Scenarios ==> Behavioural Ecology ==> Beehive</h3>
 <p style="color: blue; font-family: courier">This scenario does not exist yet !&nbsp;&nbsp;&nbsp;&nbsp;</p>
@@ -133,7 +139,7 @@
 <h3>Scenarios ==> Dyadic games ==> Cooperation</h3>
 <p style="color: blue; font-family: courier">Cooperation Scenario:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Individual A cooperates with individual B with the hope that<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B will reciprocate. A remembers B if it is the case.</p>
 
-<h4>Scenarios ==> Dyadic games ==> Cooperation ==> FirstStep --> 55</h4>
+<h4>Scenarios ==> Dyadic games ==> Cooperation ==> FirstStep --> 10</h4>
 <p style="color: blue; font-family: courier">Indicates the maximal number of score points <br>that can be granted by the first player to its partner.<br>This amount is modulated by the value of the first player's<br>corresponding gene.</p>
 
 <h4>Scenarios ==> Dyadic games ==> Cooperation ==> FirstStepCost --> 30</h4>
@@ -192,6 +198,9 @@
 
 <h4>Scenarios ==> Dyadic games ==> Gazelle ==> CatchByChance --> 20</h4>
 <p style="color: blue; font-family: courier">Probability (in percentage) that a lion catches a strong gazelle anyway</p>
+
+<h4>Scenarios ==> Dyadic games ==> Gazelle ==> GazelleToLionRatio --> 80</h4>
+<p style="color: blue; font-family: courier">Percentage of gazelles (G/(G+L))</p>
 
 <h3>Scenarios ==> Dyadic games ==> CostlySignal</h3>
 <p style="color: blue; font-family: courier">EVOLIFE: Costly Signal Scenario:<br>&nbsp;&nbsp;&nbsp;&nbsp;Individuals may emit a signal in relation with their quality.<br>&nbsp;&nbsp;&nbsp;&nbsp;Emitting this signal involves a cost.<br>&nbsp;&nbsp;&nbsp;&nbsp;Receivers read the signal and decide to associate or not with the emitter.<br>&nbsp;&nbsp;&nbsp;&nbsp;Association provides benefit to emitters.<br>&nbsp;&nbsp;&nbsp;&nbsp;Association provides benefit to receivers only if emitter is of high quality.<br>&nbsp;&nbsp;&nbsp;&nbsp;Evolution leads to a situation in which communication is honest,<br>&nbsp;&nbsp;&nbsp;&nbsp;i.e. individuals signal their true quality.<br>&nbsp;&nbsp;&nbsp;&nbsp;This is due to the fact that liars (l-q signalling individuals) cannot<br>&nbsp;&nbsp;&nbsp;&nbsp;afford the cost of high signals.<br></p>
@@ -253,31 +262,31 @@
 <h1>Ecology</h1>
 <p style="color: blue; font-family: courier"><br></p>
 
-<h2>Ecology ==> PopulationSize --> 200</h2>
+<h2>Ecology ==> PopulationSize --> 400</h2>
 <p style="color: blue; font-family: courier">The size of the population is maintained constant <br><br></p>
 
-<h2>Ecology ==> MigrationRate --> 30</h2>
+<h2>Ecology ==> MigrationRate --> 10</h2>
 <p style="color: blue; font-family: courier">Each year, a fraction (in %) of individuals migrate between groups.</p>
 
-<h2>Ecology ==> ReproductionRate --> 20</h2>
+<h2>Ecology ==> ReproductionRate --> 30</h2>
 <p style="color: blue; font-family: courier">Proportion of the population that is replaced with newborns each year (in %)<br></p>
 
-<h2>Ecology ==> SelectionPressure --> 5</h2>
+<h2>Ecology ==> SelectionPressure --> 0</h2>
 <p style="color: blue; font-family: courier">Defines how individual survival depends on score:<br><br>0 -->&nbsp;&nbsp; no bias<br>12 -->&nbsp;&nbsp;Highest scores may have 12 times less chance to be eliminated<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;than individuals with lowest scores<br><br>(Note that selection may also be achieved through differential reproduction<br>(see parameter Selectivity))<br><br>Important: For selection pressure to operate properly, scores should always be positive<br><br>Warning: This selection method tends to "saturate": when most scores reach high values,<br>the method is blind to slight differences among individuals. However, it might be less<br>violent than the selectivity method, which has converse qualities.</p>
 
-<h2>Ecology ==> Selectivity --> 0</h2>
+<h2>Ecology ==> Selectivity --> 1</h2>
 <p style="color: blue; font-family: courier">Defines how parenthood is biased toward individuals with high scores<br><br>S == 0 --> no bias<br>S == 1 --> elitism is roughly linear<br>S == 20 --> strong elitism<br>S == 40 --> very strong elitism<br><br>(Note that selection may also be achieved through differential mortality <br>(see parameter SelectionPressure))<br><br> Warning: This selection method is elitist. It amplifies small differences among top inidividuals, <br>but fails to discriminate among the crowd. It favours extreme (or lucky) behaviour. The SelectionPressure method has converse <br>qualities.</p>
 
-<h2>Ecology ==> GroupMaxSize --> 0</h2>
+<h2>Ecology ==> GroupMaxSize --> 1000</h2>
 <p style="color: blue; font-family: courier">The population is split in groups.<br>Groups are an ecological entity: reproductions and interactions take place within the group.<br>"Group maximal size" indicates the maximal size of a group. Groups that are too big are split in two.<br>Expect actual groups to be roughly half of that size.<br></p>
 
 <h2>Ecology ==> GroupMinSize --> 0</h2>
 <p style="color: blue; font-family: courier">Group minimal size<br>Groups that are too small are dissolved: their members must emigrate to other existing groups<br></p>
 
-<h2>Ecology ==> Rounds --> 1</h2>
+<h2>Ecology ==> Rounds --> 0</h2>
 <p style="color: blue; font-family: courier">Numbers of times each individual interacts with others each year</p>
 
-<h2>Ecology ==> AgeMax --> 10</h2>
+<h2>Ecology ==> AgeMax --> 4000</h2>
 <p style="color: blue; font-family: courier">Above that age, individuals die. Set to 0 if no maximum age.</p>
 
 <h2>Ecology ==> Noise --> 10</h2>
@@ -298,10 +307,10 @@
 <h1>Genetics</h1>
 <p style="color: blue; font-family: courier"></p>
 
-<h2>Genetics ==> MutationRate --> 15</h2>
+<h2>Genetics ==> MutationRate --> 3</h2>
 <p style="color: blue; font-family: courier">Mutation rate in xxx/1000 <br></p>
 
-<h2>Genetics ==> NbCrossover --> 1</h2>
+<h2>Genetics ==> NbCrossover --> 2</h2>
 <p style="color: blue; font-family: courier">Indicates the number of cut points when performing crossover</p>
 
 <h2>Genetics ==> GeneCoding --> 0</h2>
@@ -319,10 +328,10 @@
 <h3>Genetics ==> GeneCoding ==> NoCoding --> -1</h3>
 <p style="color: blue; font-family: courier"></p>
 
-<h2>Genetics ==> GeneLength --> 8</h2>
+<h2>Genetics ==> GeneLength --> 0</h2>
 <p style="color: blue; font-family: courier">Some scenarios don't specify gene length (by setting it to zero).<br>The value indicated here is taken as default value in this case.</p>
 
-<h2>Genetics ==> DNAFill --> 0</h2>
+<h2>Genetics ==> DNAFill --> -1</h2>
 <p style="color: blue; font-family: courier">DNA created from scratch may be random (DNAFill = -1) <br>or filled withl 0s (DNAFill = 0) or with 1s (DNAFill =1)</p>
 
 <h2>Genetics ==> StartFromFile --> 0</h2>
@@ -334,10 +343,10 @@
 <h1>Display</h1>
 <p style="color: blue; font-family: courier"></p>
 
-<h2>Display ==> DisplayPeriod --> 10</h2>
+<h2>Display ==> DisplayPeriod --> 50</h2>
 <p style="color: blue; font-family: courier">Period between successive plots <br>0:&nbsp;&nbsp;no plot<br>1:&nbsp;&nbsp;plot every year<br>10: typical<br><br></p>
 
-<h2>Display ==> TimeLimit --> 10000</h2>
+<h2>Display ==> TimeLimit --> 40000</h2>
 <p style="color: blue; font-family: courier">Maximum number of steps before simulation stops. Set to 0 if no limit.<br>If DisplayPeriod == 0, Evolife will automatically exit after TimeLimit.<br>Otherwise, it will switch to stepwise mode. It is thus ready to <br>run until another TimeLimit is reached again.<br></p>
 
 <h2>Display ==> DumpStart --> 100</h2>
@@ -346,7 +355,7 @@
 <h1>Run Settings</h1>
 <p style="color: blue; font-family: courier"></p>
 
-<h2>Run Settings ==> BatchMode --> 0</h2>
+<h2>Run Settings ==> BatchMode --> 1</h2>
 <p style="color: blue; font-family: courier">If set to 1, no display occurs. Useful to launch experiments in batch mode, e.g. on several machines. <br>Results are still stored in .csv files. In batch mode, these files are given unique names, so that different experiments can be run simultaneously.</p>
 
 <h2>Run Settings ==> ApplicationDir --> .</h2>

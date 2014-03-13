@@ -75,6 +75,23 @@ Indicates whether the female part of the DNA codes for absolute directions (East
 
 <h5>Scenarios ==> Genetic Algorithms ==> WernerDyer ==> WDGridSize ==> 100</h5>
 
+<h3>Scenarios ==> Genetic Algorithms ==> DeoMoreau</h3>
+EVOLIFE: Scenario DeoMoreau :<br>&nbsp;&nbsp;&nbsp;&nbsp;see:&nbsp;&nbsp;&nbsp;&nbsp; http://www.telecom-paristech.fr/~icc/IC/projects/P06121815.html&nbsp;&nbsp;(in English)<br>&nbsp;&nbsp;&nbsp;&nbsp;see:&nbsp;&nbsp;&nbsp;&nbsp;http://www.dessalles.fr/outgoing/P05013107.html (in French, more detailed)<br><br>Relevant parameters are:<br>&nbsp;&nbsp;&nbsp;&nbsp;- Compass (if set to 1, individuals orient themselves along absolute directions, N,E,W,S)<br>&nbsp;&nbsp;&nbsp;&nbsp; - AdCost: cout de l'advertizing<br>&&nbsp;&nbsp;&nbsp;&nbsp;- WDGridSize: size of the toric world in which individuals move<br>&nbsp;&nbsp;&nbsp;&nbsp;- PopulationSize: how crowdy the world is<br>&nbsp;&nbsp;&nbsp;&nbsp;- Selectivity: how many children are given to a successful couple<br>&nbsp;&nbsp;&nbsp;&nbsp;- Noise: defines in % how often a random direction is taken
+
+<h4>Scenarios ==> Genetic Algorithms ==> DeoMoreau ==> Compass</h4>
+Indicates whether the female part of the DNA codes for absolute directions (East, North, West, South) (Compass==1)<br>or codes for direction change (straight on, left, right, u-turn) (Compass==0).<br>
+
+<h5>Scenarios ==> Genetic Algorithms ==> DeoMoreau ==> Compass ==> 0</h5>
+
+
+<h4>Scenarios ==> Genetic Algorithms ==> DeoMoreau ==> WDGridSize</h4>
+
+
+<h5>Scenarios ==> Genetic Algorithms ==> DeoMoreau ==> WDGridSize ==> 100</h5>
+
+<h4>Scenarios ==> Genetic Algorithms ==> DeoMoreau ==> AdCost</h4>
+<h5>Scenarios ==> Genetic Algorithms ==> DeoMoreau ==> AdCost ==> 1.2</h5>
+
 
 <h3>Scenarios ==> Genetic Algorithms ==> Zip</h3>
 This scenario uses a genetic algorithm to simplify a string, or conversely make it more complex. <br>Here, complexity is assessed by the size of its compressed length (using compressor gzip or bzip2). <br>The point is to show that simplification produces quasi-periodic strings and that it is difficult <br>for standard genetic algorithms to escape from local optima.<br><br>When the 'Simplify' parameter is set to 0, the programme ideally attempts to <br>generate a random (i.e. incompressible) sequence.<br><br>In the not-BitString mode, the evolution gets more obviously trapped in many local optima.<br>

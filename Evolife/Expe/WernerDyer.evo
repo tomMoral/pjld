@@ -1,7 +1,6 @@
-AdCost	1.2
 AgeMax	4000
 ApplicationDir	.
-BatchMode	1
+BatchMode	0
 Compass	0
 ControlGeneNumber	6
 DNAFill	-1

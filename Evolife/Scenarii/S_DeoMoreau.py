@@ -112,16 +112,17 @@ class Scenario(Default_Scenario):
 	######################################
 
 	def initialization(self):
-		self.Ground = Grid(self.Parameter('WDGridSize'))
+		self.Ground = Grid(self.Parameter('WDGridSize_DM'))
 		self.Parents = []	# stores couples that successfully met to procreate
 		self.CurrentReproductionNumber = []
 		self.MovMap = {0:(1,0), 1:(0,-1), 2:(-1,0), 3:(0,1)} # successive 90d rotations
 		self.MapMov = {(1,0):0, (0,-1):1, (-1,0):2, (0,1):3} # absolute directions
-		if self.Parameter('Compass'):
+		if self.Parameter('Compass_DM'):
 			self.TurnMap = {0:0, 1:1, 2:3, 3:2} # Absolute directions, with Gray code
 		else:
 			self.TurnMap = {0:0, 1:-1, 2:1, 3:2} # important to have a Gray code here: a U-turn requires more genetic change
 		self.PopSize = 0
+		self.proba = 0
 
 	def genemap(self):
 		""" Defines the name of genes and their position on the DNA. (see Genetic_map.py)
@@ -134,12 +135,12 @@ class Scenario(Default_Scenario):
 			(within a 5x5 range). They decide to move or turn accordingly.
 			The male part of the genome thus requires only 8 bits for this mapping. 
 		"""
-		if self.Parameter('Compass'):
+		if self.Parameter('Compass_DM'):
 			return [('coding',8), ('decoding',48), 
-								('bty_th',7), ('chh_th',8)]
+				('bty_th',8), ('chh_th',8)]
 		else:
 			return [('coding',8), ('decoding',192), 
-								('bty_th',7), ('chh_th', 8)]
+				('bty_th',8), ('chh_th', 8)]
 
 	def phenemap(self):
 		""" Defines the set of non inheritable characteristics
@@ -147,7 +148,8 @@ class Scenario(Default_Scenario):
 		# Sex is considered a phenotypic characteristic !
 		# This is convenient because sex is determined at birth
 		# and is not inheritable
-		return ['Sex', 'Direction', 'Penalty', 'Beauty', 'Idle', 'Ad']
+		return ['Sex', 'Direction', 'Penalty', 'Beauty', 'Idle', 'Ad',
+                        'init']
 
 	def female(self, Agent):
 		return Agent.Phene_relative_value('Sex') >= 50
@@ -157,11 +159,13 @@ class Scenario(Default_Scenario):
 		return Agent.Phene_value('Direction')
 
 	def colour(self, Agent):
-		if Agent.Phene_value('Idle') > 0:
-			return 10
-		elif self.female(Agent):
+		if self.female(Agent):
+			if Agent.Phene_value('Idle') > 0:
+				return 4
 			return 8
 		else:
+			if Agent.Phene_value('Idle') > 0:
+				return 2
 			return 7
 
 	def paint(self, Agent, Colour = None):
@@ -174,6 +178,7 @@ class Scenario(Default_Scenario):
 		" defines a phenotype for individual and returns it "
 
 		#print reduce(lambda x,y: x+str(y), Avg_Indiv.get_DNA()[:60],'')
+		Avg_Indiv.Phene_value('Ad',99)
 		Paths = []
 		grid = self.Ground.Neighbourhood((3,3))
 		# Entrance: [(direction, ways in)...]
@@ -181,6 +186,7 @@ class Scenario(Default_Scenario):
 					(self.MapMov[(0,1)],((1,1),(2,1),(3,1),(4,1),(5,1))),
 					(self.MapMov[(-1,0)],((5,1),(5,2),(5,3),(5,4),(5,5))),
 					(self.MapMov[(0,-1)],((1,5),(2,5),(3,5),(4,5),(5,5)))]
+		proba = 0
 		for (FirstDir,Entries) in Entrance:
 			for FirstPos in Entries:
 				(Pos,Dir) = (FirstPos, FirstDir)
@@ -204,6 +210,7 @@ class Scenario(Default_Scenario):
 						Cell = grid.index(Pos)
 					except ValueError:
 						break
+				if Path[-1] == (3,3): proba += 1
 				Paths.append(Path)
 
 		if Paths == None:	return None
@@ -242,6 +249,10 @@ class Scenario(Default_Scenario):
 				Behaviour.append(("S4_%d" % (nro+15*P), (transform(LastStep) + (3+P, 0) + transform(NewStep) + (3+P,3))))
 				LastStep = NewStep
 
+		#Compute the probability of encountering a female if you are in
+		#her neighboorhood
+		self.proba = 100* proba / 20.
+
 		return Behaviour
 		
 
@@ -261,17 +272,8 @@ class Scenario(Default_Scenario):
 		child.location = self.Ground.RandPlace(child)
 		child.Phene_value('Direction',random.randint(0,3))
 		child.Phene_value('Penalty',0)
-		if not self.female(child):
-			MDNA = child.get_DNA()
-			locus = 8 + (48 if self.Parameter('Compass') else 192) + 7
-			chh_th = int(''.join(map(str,MDNA[locus:locus+7])))
-			bty = child.Phene_value('Beauty')
-			if bty < chh_th:
-				child.Phene_value('Idle', MDNA[locus+7]*int((chh_th-bty)**1.3))
-				child.Phene_value('Ad', bty + MDNA[locus+7]*int((chh_th-bty)**0.7))
-			else:
-				child.Phene_value('Ad', bty)
-
+		child.Phene_value('Idle', 0.25)
+		child.Phene_value('init',0)
 		self.paint(child)
 
 	def remove_agent(self, Agent):
@@ -286,14 +288,12 @@ class Scenario(Default_Scenario):
 			and his direction. The male's next direction depends on the song.
 		"""
 		# Where to look in the female's DNA
-		if self.Parameter('Compass'):
+		if self.Parameter('Compass_DM'):
 			# Female's DNA codes for Male's next absolute direction
 			Locus = 8 + 2 * (MaleRelativeLocation)
-			bty_locus = 8 + 48
 		else:
 			# Female's DNA codes for Male's change of direction
 			Locus = 8 + 2 * (MaleRelativeLocation * 4 + MaleDirection)
-			bty_locus = 8 + 192
 		# Female sings, Male moves
 ##		Song = Female.read_DNA(Locus, Locus+2, coding = self.Parameter('Weighted'))
 ##		RelativeDirection = Male.read_DNA(2 * Song, 2 * Song + 2, coding = self.Parameter('Weighted'))
@@ -306,13 +306,13 @@ class Scenario(Default_Scenario):
 ##		else:
 ##			return MaleDirection	#test
 				#Bty consideration
-		bty_th = int(''.join(map(str,FDNA[bty_locus])),base=2)
+		bty_th = Female.gene_relative_intensity('bty_th')
 		
 		male_ad = Male.Phene_value('Ad')
 		if male_ad < bty_th:
 			return MaleDirection
 
-		if self.Parameter('Compass'):
+		if self.Parameter('Compass_DM'):
 			# Female's DNA codes for Male's next absolute direction
 			return self.TurnMap[TurnCode]%4
 		else:
@@ -343,21 +343,24 @@ class Scenario(Default_Scenario):
 		Beloved = []
 		# self.Ground.Consistency()
 
-		for Female in members:
+		for Female in members:			
 			Female.score(self.Parameter('AgeMax')-Female.age,FlagSet=True)  # all individuals deteriorate
 			if not self.female(Female):
 				continue	# males wait for a song
 			idle = Female.Phene_value('Idle')
 			if idle > 0:
-				Female.Phene_value('Idle', idle-1)
+				self.paint(Female)
+				Female.Phene_value('Idle', idle-0.25)
+				if idle <0.5:
+					self.paint(Female)
 				continue
 			# locating the closest male
 			if Female.location is not None:
 				Suitors = [S for S in self.Ground.Neighbours(Female.location[0:2])
 						   if not (self.female(S) or S in Beloved 
-														   or S.Phene_value('Penalty')
-														   or S.Phene_value('Idle')
-														   ) ]
+						   or S.Phene_value('Penalty')
+                                                   or S.Phene_value('Idle')
+                                                   or S.Phene_value('init')<1) ]
 			else:
 				Suitors = []
 			if Suitors == []:
@@ -368,12 +371,27 @@ class Scenario(Default_Scenario):
 			NewDirection = self.decision(Male,Female)
 			self.Move(Male, NewDirection)
 
-		for Male in members:
+		for Male in members: 
 			if self.female(Male) or Male in Beloved:
 				continue
+			if not Male.Phene_value('init'):
+				Male.Phene_value('init', 1)
+				chh_th = Male.gene_relative_intensity('chh_th')
+				bty = Male.Phene_value('Beauty')
+				if bty < chh_th:
+					ad_cost = float(self.Parameter('AdCost'))
+					Male.Phene_value('Idle', int((chh_th-bty)**ad_cost),True)
+					Male.Phene_value('Ad', chh_th ,True)
+				else:
+					Male.Phene_value('Idle', 0, True)
+					Male.Phene_value('Ad', bty)
+				self.paint(Male)
+
 			idle = Male.Phene_value('Idle')
 			if idle > 0:
-				Male.Phene_value('Idle', idle-1)
+				Male.Phene_value('Idle', idle-0.25)
+				if idle < 0.5:
+					self.paint(Male)
 				continue
 
 		# lonely males go straight most of the time
@@ -403,8 +421,14 @@ class Scenario(Default_Scenario):
 		
 		# actual movement
 		Partner = self.Ground.Locate(NewPosition)
-		if Partner is not None and self.female(Partner):
+		if Partner is not None and self.female(Partner) and Partner.Phene_value('Idle') <= 0:
 			# Reproduction takes place
+			bty_f = Partner.Phene_value('Beauty')
+			bty_m = Male.Phene_value('Beauty')
+			if bty_f > bty_m:
+				ad_cost = float(self.Parameter('AdCost'))
+				Partner.Phene_value('Idle', min(int(((bty_f-bty_m)**ad_cost)/4.),100))
+				self.paint(Partner)
 			self.Parents.append((Male,Partner))
 			self.Ground.RandPlace(Male),
 			self.Ground.RandPlace(Partner)
@@ -422,7 +446,10 @@ class Scenario(Default_Scenario):
 	def display_(self):
 		""" Defines what is to be displayed. 
 		"""
-		return [('white','Reproduction'), ('green2','PopSize')]
+		return [('grey','Reproduction'),
+                        ('black','PopSize'), ('white','chh_th'),
+                        ('blue','bty_th'),
+                        ('red', 'ProbaMeet')]
 		
 	def local_display(self,PlotNumber):
 		" allows to diplay locally defined values "
@@ -431,6 +458,8 @@ class Scenario(Default_Scenario):
 			return 100*sum(self.CurrentReproductionNumber,0.0)/max(len(self.CurrentReproductionNumber),1)
 		elif PlotNumber == 'PopSize':
 			return self.PopSize // 10
+		elif PlotNumber == 'ProbaMeet':
+			return self.proba
 
 	def wallpaper(self, Window):
 		" displays background image or colour when the window is created "

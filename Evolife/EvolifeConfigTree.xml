@@ -5,7 +5,7 @@
 	</Parameter>
 	<Parameter>
 		<Name>Scenarios</Name>
-		<Description><info><![CDATA[Available scenarios:<br>==============<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;&nbsp;&nbsp;&nbsp;# a scenario that does nothing, but that you may customize<br><br>Genetic algorithm<br>-----------------<br>&nbsp;&nbsp;&nbsp;&nbsp;SumBits&nbsp;&nbsp;&nbsp;&nbsp; # maximizes the number of 1 in the DNA<br>&nbsp;&nbsp;&nbsp;&nbsp;Labyrinth&nbsp;&nbsp; # tries to escape from a labyrinth<br>&nbsp;&nbsp;&nbsp;&nbsp;WernerDyer&nbsp;&nbsp;# emergence of a communication code<br>&nbsp;&nbsp;&nbsp;&nbsp;Zip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # tries to make the DNA (un)compressible<br><br>Behavioural Ecology<br>-------------------<br>> Solitary games<br>&nbsp;&nbsp;&nbsp;&nbsp;Favourable&nbsp;&nbsp;# favourable mutation: basic Darwinian principle<br>&nbsp;&nbsp;&nbsp;&nbsp;GroupAltruist&nbsp;&nbsp; # group selection<br>&nbsp;&nbsp;&nbsp;&nbsp;Parthenogenesis # females beget clones of themselves<br>&nbsp;&nbsp;&nbsp;&nbsp;SexRatio&nbsp;&nbsp;&nbsp;&nbsp;# parents control the sex ratio among their children<br><br>> Dyadic games<br>&nbsp;&nbsp;&nbsp;&nbsp;Altruist&nbsp;&nbsp;&nbsp;&nbsp;# provides help at own's expense<br>&nbsp;&nbsp;&nbsp;&nbsp;KinAltruist # provides help towards kin<br>&nbsp;&nbsp;&nbsp;&nbsp;Cooperation&nbsp;&nbsp;&nbsp;&nbsp;# evolution of reciprocal cooperation<br>&nbsp;&nbsp;&nbsp;&nbsp;GreenBeard&nbsp;&nbsp;# provides help to other cariers of the same mutation<br>&nbsp;&nbsp;&nbsp;&nbsp;Signalling&nbsp;&nbsp; # individuals form coalitions<br>&nbsp;&nbsp;&nbsp;&nbsp;StagHunt&nbsp;&nbsp;&nbsp;&nbsp;# individuals play a 'stag hunt' game<br>&nbsp;&nbsp;&nbsp;&nbsp;Ethnocentrism<br>&nbsp;&nbsp;&nbsp;&nbsp;Bargaining<br>&nbsp;&nbsp;&nbsp;&nbsp;Coordination<br><br>]]></info></Description>
+		<Description><info><![CDATA[Available scenarios:<br>==============<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;&nbsp;&nbsp;&nbsp;# a scenario that does nothing, but that you may customize<br><br>Genetic algorithm<br>-----------------<br>&nbsp;&nbsp;&nbsp;&nbsp;SumBits&nbsp;&nbsp;&nbsp;&nbsp; # maximizes the number of 1 in the DNA<br>&nbsp;&nbsp;&nbsp;&nbsp;Labyrinth&nbsp;&nbsp; # tries to escape from a labyrinth<br>&nbsp;&nbsp;&nbsp;&nbsp;WernerDyer&nbsp;&nbsp;# emergence of a communication code<br>&nbsp;&nbsp;&nbsp;&nbsp;DeoMoreau&nbsp;&nbsp;#emergence of a communication code with lies<br>&nbsp;&nbsp;&nbsp;&nbsp;Zip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # tries to make the DNA (un)compressible<br><br>Behavioural Ecology<br>-------------------<br>> Solitary games<br>&nbsp;&nbsp;&nbsp;&nbsp;Favourable&nbsp;&nbsp;# favourable mutation: basic Darwinian principle<br>&nbsp;&nbsp;&nbsp;&nbsp;GroupAltruist&nbsp;&nbsp; # group selection<br>&nbsp;&nbsp;&nbsp;&nbsp;Parthenogenesis # females beget clones of themselves<br>&nbsp;&nbsp;&nbsp;&nbsp;SexRatio&nbsp;&nbsp;&nbsp;&nbsp;# parents control the sex ratio among their children<br><br>> Dyadic games<br>&nbsp;&nbsp;&nbsp;&nbsp;Altruist&nbsp;&nbsp;&nbsp;&nbsp;# provides help at own's expense<br>&nbsp;&nbsp;&nbsp;&nbsp;KinAltruist # provides help towards kin<br>&nbsp;&nbsp;&nbsp;&nbsp;Cooperation&nbsp;&nbsp;&nbsp;&nbsp;# evolution of reciprocal cooperation<br>&nbsp;&nbsp;&nbsp;&nbsp;GreenBeard&nbsp;&nbsp;# provides help to other cariers of the same mutation<br>&nbsp;&nbsp;&nbsp;&nbsp;Signalling&nbsp;&nbsp; # individuals form coalitions<br>&nbsp;&nbsp;&nbsp;&nbsp;StagHunt&nbsp;&nbsp;&nbsp;&nbsp;# individuals play a 'stag hunt' game<br>&nbsp;&nbsp;&nbsp;&nbsp;Ethnocentrism<br>&nbsp;&nbsp;&nbsp;&nbsp;Bargaining<br>&nbsp;&nbsp;&nbsp;&nbsp;Coordination<br><br>]]></info></Description>
 		<Parameter>
 			<Name>CurrentScenario</Name>
 			<Parameter>
@@ -87,9 +87,22 @@
 					<Name>WDGridSize</Name>
 					<Value>200</Value>
 				</Parameter>
-				<Parameter Scenario="WernerDyer">
+			</Parameter>
+			<Parameter>
+				<Name>DeoMoreau</Name>
+				<Description><info><![CDATA[EVOLIFE:Scenario DeoMoreau :<br>&nbsp;&nbsp;&nbsp;&nbsp;see:&nbsp;&nbsp;&nbsp;&nbsp; http://www.telecom-paristech.fr/~icc/IC/projects/P06121815.html&nbsp;&nbsp;(in English)<br>&nbsp;&nbsp;&nbsp;&nbsp;see:&nbsp;&nbsp;&nbsp;&nbsp;http://www.dessalles.fr/outgoing/P05013107.html (in French, more detailed)<br><br>Relevant parameters are:<br>&nbsp;&nbsp;&nbsp;&nbsp;- Compass (if set to 1, individuals orient themselves along absolute directions, N,E,W,S)<br>&nbsp;&nbsp;&nbsp;nbsp; - AdCost: the cost of the advertising <br>&nbsp;&nbsp;&nbsp;&nbsp;- WDGridSize: size of the toric world in which individuals move<br>&nbsp;&nbsp;&nbsp;&nbsp;- PopulationSize: how crowdy the world is<br>&nbsp;&nbsp;&nbsp;&nbsp;- Selectivity: how many children are given to a successful couple<br>&nbsp;&nbsp;&nbsp;&nbsp;- Noise: defines in % how often a random direction is taken]]></info></Description>
+				<Parameter Scenario="DeoMoreau">
+					<Name>Compass_DM</Name>
+					<Description><info><![CDATA[Indicates whether the female part of the DNA codes for absolute directions (East, North, West, South) (Compass==1)<br>or codes for direction change (straight on, left, right, u-turn) (Compass==0).<br>]]></info></Description>
+					<Value>0</Value>
+				</Parameter>
+				<Parameter Scenario="DeoMoreau">
+					<Name>WDGridSize_DM</Name>
+					<Value>200</Value>
+				</Parameter>
+				<Parameter Scenario="DeoMoreau">
 					<Name>AdCost</Name>
-					<Value>1.3</Value>
+					<Value>1.2</Value>
 				</Parameter>
 			</Parameter>
 			<Parameter>
@@ -524,7 +537,7 @@
 		<Parameter>
 			<Name>BatchMode</Name>
 			<Description><info><![CDATA[If set to 1, no display occurs. Useful to launch experiments in batch mode, e.g. on several machines. <br>Results are still stored in .csv files. In batch mode, these files are given unique names, so that different experiments can be run simultaneously.]]></info></Description>
-			<Value>1</Value>
+			<Value>0</Value>
 		</Parameter>
 		<Parameter>
 			<Name>ApplicationDir</Name>
